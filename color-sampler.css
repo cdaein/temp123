@@ -29,6 +29,10 @@ body {
 
 /* --- Two-column workspace --- */
 
+.workspace[hidden] {
+  display: none;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -252,6 +256,39 @@ header p {
   background: #d4edda;
   border-color: #28a745;
   color: #155724;
+}
+
+.swatch {
+  position: relative;
+}
+
+.swatch-delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swatch:hover .swatch-delete {
+  opacity: 1;
+}
+
+.swatch-delete:hover {
+  background: rgba(210, 47, 47, 0.8);
 }
 
 .eyedropper-placeholder {

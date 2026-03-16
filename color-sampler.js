@@ -365,6 +365,13 @@
     }
 
     swatch.appendChild(values);
+
+    var del = document.createElement("button");
+    del.className = "swatch-delete";
+    del.title = "Remove swatch";
+    del.textContent = "\u00d7";
+    swatch.appendChild(del);
+
     return swatch;
   }
 
@@ -629,8 +636,15 @@
     loupeEl.hidden = true;
   });
 
-  // Delegated click-to-copy on color values
+  // Delegated click: delete swatch or copy value
   document.addEventListener("click", function (e) {
+    // Delete swatch
+    var del = e.target.closest(".swatch-delete");
+    if (del) {
+      del.closest(".swatch").remove();
+      return;
+    }
+
     var btn = e.target.closest(".color-value");
     if (!btn) return;
 
