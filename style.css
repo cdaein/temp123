@@ -1,3 +1,12 @@
+:root {
+  --accent: #1A1AFF;
+  --text: #111;
+  --muted: #888;
+  --border: #d0d0d0;
+  --col-label: 150px;
+  --col-gap: 2.5rem;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -5,43 +14,49 @@
 }
 
 body {
-  font-family: sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #111;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
   background: #fff;
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 4rem 3rem;
 }
 
-/* Header */
+/* ─── Header ──────────────────────────────────────────── */
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 3rem;
+body > header {
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .identity h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: 'Playfair Display', serif;
+  font-size: 3.25rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
 }
 
 .identity .title {
-  color: #666;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
 }
 
 .contact {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.2rem;
-  font-size: 0.875rem;
-  color: #444;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
 }
 
 .contact a {
@@ -50,128 +65,222 @@ header {
 }
 
 .contact a:hover {
-  text-decoration: underline;
+  color: var(--text);
 }
 
-/* Sections */
+/* ─── Main Grid ───────────────────────────────────────── */
+
+main {
+  counter-reset: section;
+}
 
 section {
-  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: var(--col-label) 1fr;
+  column-gap: var(--col-gap);
+  margin-bottom: 3rem;
 }
 
 section h2 {
-  font-size: 0.75rem;
+  grid-column: 1;
+  grid-row: 1 / -1;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #999;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 0.4rem;
-  margin-bottom: 1.25rem;
+  color: var(--muted);
+  padding-top: 0.25rem;
+  counter-increment: section;
 }
 
-/* Job / Degree entries */
-
-article.job,
-article.degree {
-  margin-bottom: 1.5rem;
+section h2::before {
+  content: "0" counter(section) " ";
+  color: var(--accent);
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.05em;
 }
 
-article.job header,
-article.degree header {
+section > *:not(h2) {
+  grid-column: 2;
+}
+
+/* ─── Summary ─────────────────────────────────────────── */
+
+.summary p {
+  color: #333;
+  line-height: 1.8;
+}
+
+/* ─── Experience ──────────────────────────────────────── */
+
+article.job {
+  margin-bottom: 2rem;
+}
+
+article.job:last-child {
+  margin-bottom: 0;
+}
+
+article.job > header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 0.5rem;
 }
 
-article.job header h3,
-article.degree header h3 {
+article.job > header h3 {
   font-size: 1rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.company,
-.institution {
-  font-size: 0.875rem;
-  color: #666;
+.company {
+  font-size: 0.8125rem;
+  color: var(--muted);
   display: block;
 }
 
 time {
-  font-size: 0.875rem;
-  color: #888;
+  font-size: 0.8125rem;
+  color: var(--muted);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 article.job ul {
-  padding-left: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+article.job ul li {
+  font-size: 0.9375rem;
+  color: #333;
+  padding-left: 1rem;
+  position: relative;
+  margin-bottom: 0.2rem;
+}
+
+article.job ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--border);
+}
+
+/* ─── Skills ──────────────────────────────────────────── */
+
+.skills ul {
+  list-style: none;
+  padding: 0;
+}
+
+.skills li {
+  display: inline;
   font-size: 0.9375rem;
   color: #333;
 }
 
-article.job ul li {
-  margin-bottom: 0.25rem;
+.skills li:not(:last-child)::after {
+  content: ",  ";
+  color: var(--muted);
 }
 
-/* Skills */
+/* ─── Education ───────────────────────────────────────── */
 
-.skills ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  list-style: none;
-  padding: 0;
-  font-size: 0.9375rem;
-}
-
-/* Selected Work */
-
-article.project {
-  margin-bottom: 1.5rem;
-}
-
-article.project header {
+article.degree > header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 0.25rem;
 }
 
-article.project header h3 {
+article.degree > header h3 {
   font-size: 1rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-article.project header a {
-  font-size: 0.875rem;
-  color: #555;
+.institution {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  display: block;
+}
+
+/* ─── Selected Work ───────────────────────────────────── */
+
+article.project {
+  margin-bottom: 2rem;
+}
+
+article.project:last-child {
+  margin-bottom: 0;
+}
+
+article.project > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+}
+
+article.project > header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+article.project > header a {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+article.project > header a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 article.project p {
   font-size: 0.9375rem;
   color: #444;
+  line-height: 1.7;
 }
 
-/* Footer */
+/* ─── Footer ──────────────────────────────────────────── */
 
-footer {
-  margin-top: 3rem;
+body > footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
   font-size: 0.8125rem;
-  color: #aaa;
-  text-align: center;
+  color: var(--muted);
 }
 
-/* Print */
+/* ─── Print ───────────────────────────────────────────── */
 
 @media print {
   body {
-    padding: 1.5rem;
-    font-size: 11pt;
+    padding: 1.5rem 2rem;
+    font-size: 10.5pt;
+    max-width: 100%;
+  }
+
+  .identity h1 {
+    font-size: 2.25rem;
   }
 
   a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
+    border: none !important;
+  }
+
+  article.project > header a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: var(--muted);
   }
 }
