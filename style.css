@@ -259,6 +259,31 @@ body > footer {
   color: var(--muted);
 }
 
+/* ─── Name Animation ─────────────────────────────────── */
+
+@keyframes name-reveal {
+  from {
+    opacity: 0;
+    translate: 0 0.4rem;
+    color: transparent;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    color: var(--accent);
+  }
+}
+
+.identity h1 {
+  animation: name-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .identity h1 {
+    animation: none;
+  }
+}
+
 /* ─── Print ───────────────────────────────────────────── */
 
 @media print {
