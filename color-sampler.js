@@ -19,6 +19,7 @@
   const fileInput = document.getElementById("file-input");
   const fileBtn = document.getElementById("file-btn");
   const dropError = document.getElementById("drop-zone-error");
+  const workspace = document.getElementById("workspace");
   const imageSection = document.getElementById("image-section");
   const imageContainer = document.getElementById("image-container");
   const imageCanvas = document.getElementById("image-canvas");
@@ -528,9 +529,9 @@
     dropError.hidden = true;
 
     loadImageFromFile(file).then(function (img) {
-      // Show image section, hide drop zone
+      // Show workspace, hide drop zone
       dropZone.hidden = true;
-      imageSection.hidden = false;
+      workspace.hidden = false;
 
       // Draw display canvas (max 800px wide)
       drawToCanvas(img, imageCanvas, imageCtx, 800);
@@ -548,7 +549,6 @@
 
   function runAnalysis() {
     clearResults();
-    resultsSection.hidden = false;
 
     var pixels = extractPixels(analysisCanvas, analysisCtx);
     if (pixels.length === 0) {
@@ -569,8 +569,7 @@
   }
 
   function resetToStart() {
-    imageSection.hidden = true;
-    resultsSection.hidden = true;
+    workspace.hidden = true;
     dropZone.hidden = false;
     dropError.hidden = true;
     fileInput.value = "";
