@@ -23,9 +23,19 @@ body {
   background: var(--cs-bg);
   color: var(--cs-text);
   line-height: 1.5;
-  max-width: 960px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem 1.5rem 4rem;
+}
+
+/* --- Two-column workspace --- */
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* --- Header --- */
@@ -84,6 +94,8 @@ header p {
   text-align: center;
   transition: border-color 0.2s, background 0.2s;
   cursor: pointer;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .drop-zone.dragover {
@@ -116,7 +128,8 @@ header p {
 /* --- Image Section --- */
 
 .image-section {
-  margin-top: 1.5rem;
+  position: sticky;
+  top: 1rem;
 }
 
 .image-toolbar {
@@ -173,7 +186,6 @@ header p {
 /* --- Results --- */
 
 .results {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -194,15 +206,9 @@ header p {
 }
 
 .swatches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.swatch {
-  flex: 1 1 140px;
-  max-width: 200px;
-  min-width: 120px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 .swatch-color {
@@ -210,7 +216,7 @@ header p {
   aspect-ratio: 1;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .swatch-values {
@@ -289,29 +295,28 @@ header p {
 
 /* --- Responsive --- */
 
-@media (max-width: 640px) {
+@media (max-width: 860px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+
+  .image-section {
+    position: static;
+  }
+
+  .swatches {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
   body {
     padding: 1.25rem 1rem 3rem;
   }
 
-  .swatch {
-    flex: 1 1 100%;
-    max-width: 100%;
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-
-  .swatch-color {
-    width: 64px;
-    min-width: 64px;
-    aspect-ratio: 1;
-    margin-bottom: 0;
-  }
-
-  .swatch-values {
-    flex: 1;
-    min-width: 0;
+  .swatches {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .algorithm-group {

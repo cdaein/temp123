@@ -32,25 +32,28 @@
       <p id="drop-zone-error" class="drop-zone-error" hidden></p>
     </section>
 
-    <!-- Zone 2: Image display + eyedropper -->
-    <section id="image-section" class="image-section" hidden>
-      <div class="image-toolbar">
-        <button id="new-image-btn" class="btn btn-small">New Image</button>
-      </div>
-      <div class="image-container" id="image-container">
-        <canvas id="image-canvas"></canvas>
-        <div id="loupe" class="loupe" hidden>
-          <canvas id="loupe-canvas" width="120" height="120"></canvas>
+    <!-- Two-column workspace -->
+    <div id="workspace" class="workspace" hidden>
+      <!-- Left: Image display + eyedropper -->
+      <section id="image-section" class="image-section">
+        <div class="image-toolbar">
+          <button id="new-image-btn" class="btn btn-small">New Image</button>
         </div>
-      </div>
-      <p class="hint">Click anywhere on the image to pick a color</p>
-    </section>
+        <div class="image-container" id="image-container">
+          <canvas id="image-canvas"></canvas>
+          <div id="loupe" class="loupe" hidden>
+            <canvas id="loupe-canvas" width="120" height="120"></canvas>
+          </div>
+        </div>
+        <p class="hint">Click anywhere on the image to pick a color</p>
+      </section>
+
+      <!-- Right: Results -->
+      <section id="results" class="results"></section>
+    </div>
 
     <!-- Hidden canvas for downsampled analysis -->
     <canvas id="analysis-canvas" hidden></canvas>
-
-    <!-- Zone 3: Results -->
-    <section id="results" class="results" hidden></section>
   </main>
 
   <!-- Toast -->
